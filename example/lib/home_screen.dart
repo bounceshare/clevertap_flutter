@@ -25,10 +25,10 @@ class _HomeScreenState extends State<HomeScreen> {
     String eventSuccessMessage;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      eventSuccessMessage = await ClevertapFlutter.pushEvent('Hello');
+      eventSuccessMessage = await ClevertapFlutter.pushProfile('PB', 'testpb@gmail.com');
 
     } on PlatformException {
-      eventSuccessMessage = 'Failed to get platform version.';
+      eventSuccessMessage = 'Failed to push Profile.';
     }
 
     // If the widget was removed from the tree while the asynchronous platform
@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: Container(
         color: Colors.amber,
-        child: Text('This is $_eventMessage'),
+        child: Center(child: Text('This is $_eventMessage')),
       ),
     );
   }

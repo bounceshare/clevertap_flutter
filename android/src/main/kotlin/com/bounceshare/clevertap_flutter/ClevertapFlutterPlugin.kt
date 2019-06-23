@@ -29,14 +29,17 @@ class ClevertapFlutterPlugin: MethodCallHandler {
 
       val profileUpdate = HashMap<String, Any>()
 
-      profileUpdate["Name"] = "John Doe"
-      profileUpdate["Email"] = "john@gmail.com"
+      val name : String = call.argument("profileName")?:"TEST"
+      val email : String = call.argument("profileEmail")?:"email@gmail.com"
+
+      profileUpdate["Name"] = name
+      profileUpdate["Email"] = email
 
       clevertapDefaultInstance!!.pushProfile(profileUpdate)
       clevertapDefaultInstance.pushEvent("Test event from pushProfile")
-      result.success("Pushed " + call.argument("str"))
+      result.success("Pushed $name $email" )
     }
-    else if (call.method == "pushClevertapEvent"){
+    else if (call.method == "pushEvent"){
 
       clevertapDefaultInstance!!.pushEvent("Test event from pushEvent")
       result.success("Pushed")

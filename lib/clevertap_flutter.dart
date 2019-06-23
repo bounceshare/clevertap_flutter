@@ -11,10 +11,11 @@ class ClevertapFlutter {
     return version;
   }
 
-  static Future<String> pushEvent(String text) async {
-    final String version = await _channel.invokeMethod('pushProfile', <String, dynamic>{
-      'str': text,
-    });
+  static Future<String> pushProfile(String name, String email) async {
+    Map<String, dynamic> arguments = { 'profileName': name, 'profileEmail': email };
+
+
+    final String version = await _channel.invokeMethod('pushProfile', arguments);
     return version;
   }
 }
