@@ -12,7 +12,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String _eventMessage = 'Unknown';
+  String _pushProfileMessage = 'Unknown';
+  String _pushEventMessage = 'Unknown';
+
 
 
   @override
@@ -23,12 +25,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> pushClevertapEvent() async {
     String eventSuccessMessage;
+    String profileSuccessMessage;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      eventSuccessMessage = await ClevertapFlutter.pushProfile('PB', 'testpb@gmail.com');
+      profileSuccessMessage = await ClevertapFlutter.pushProfile('PB', 'testpb@gmail.com');
+      eventSuccessMessage = await ClevertapFlutter.pushEvent();
 
     } on PlatformException {
-      eventSuccessMessage = 'Failed to push Profile.';
+      profileSuccessMessage = 'Failed to push Profile.';
+      eventSuccessMessage = 'Failed to push Event';
     }
 
     // If the widget was removed from the tree while the asynchronous platform
@@ -37,7 +42,8 @@ class _HomeScreenState extends State<HomeScreen> {
     if (!mounted) return;
 
     setState(() {
-      _eventMessage = eventSuccessMessage;
+      _pushProfileMessage = profileSuccessMessage;
+      _pushEventMessage = eventSuccessMessage;
 
     });
   }
@@ -47,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: Container(
         color: Colors.amber,
-        child: Center(child: Text('This is $_eventMessage')),
+        child: Center(child: Text('This is $_pushProfileMessage $_pushEventMessage')),
       ),
     );
   }
