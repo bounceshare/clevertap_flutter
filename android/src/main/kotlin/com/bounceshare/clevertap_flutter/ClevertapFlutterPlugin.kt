@@ -21,59 +21,54 @@ class ClevertapFlutterPlugin: MethodCallHandler {
     }
   }
 
-  val deviceDetailsMap = HashMap<String, Any>()
+  private val deviceDetailsMap = HashMap<String, Any>()
 
   override fun onMethodCall(call: MethodCall, result: Result) {
     val ct = CleverTapAPI.getDefaultInstance(Activity())
-
     when(call.method){
       "getPlatformVersion" -> result.success("Android ${android.os.Build.VERSION.RELEASE}")
 
       "pushProfile" -> {
         initializeDeviceDetailsMap()
 
-        val profileUpdate = HashMap<String, Any>()
-
-        val name : String = call.argument("profileName")?:"TEST"
-        val email : String = call.argument("profileEmail")?:"email@gmail.com"
-
-        profileUpdate["Name"] = name
-        profileUpdate["Email"] = email
-
+        val profileUpdate = call.arguments as HashMap<String, Any>
         ct!!.pushProfile(profileUpdate)
-        ct.pushEvent("Test event from pushProfile")
 
-        Log.d("flutter method", "push Event $name $email")
+        Log.d("CleverTapEvent", "pushProfile: $profileUpdate")
 
-        result.success("Pushed $name $email" )
+        result.success("Profile Pushed ${call.arguments}" )
       }
 
       "pushEvent" -> {
-        Log.d("flutter pushEvent", deviceDetailsMap.entries.toString())
 
-        val eventName : String = call.argument("eventName")?:"Test Event"
+        val eventName : String = call.argument("eventName")?:"Null Event"
+        val params : HashMap<String, Any>? = call.argument("values") as HashMap<String, Any>?
 
-        ct!!.pushEvent(eventName, deviceDetailsMap)
+        Log.d("flutter pushEvent", eventName + addDeviceDetails(params).entries.toString())
+
+        ct!!.pushEvent(eventName, addDeviceDetails(params))
         result.success(true)
       }
-
 
       else -> result.notImplemented()
     }
   }
 
+  private fun addDeviceDetails(values: HashMap<String, Any>? = null): HashMap<String, Any> {
+    deviceDetailsMap.clear()
+    initializeDeviceDetailsMap()
+
+    values?.let {
+      deviceDetailsMap.putAll(it)
+    }
+
+    Log.d("pushEvent DEVICE ", deviceDetailsMap.entries.toString())
+    return deviceDetailsMap
+  }
+
   val isDebug: Boolean by lazy {
     BuildConfig.DEBUG
   }
-
-//  override fun postEvent(eventName: String): Boolean {
-//    val values = addDeviceDetails()
-//    ct.pushEvent(eventName, values)
-//    if (isDebug) {
-//      Log.d("ClevertapEvent", "EventName: $eventName $values")
-//    }
-//    return true
-//  }
 
   private fun initializeDeviceDetailsMap() {
     deviceDetailsMap.put("OS Version", Build.VERSION.RELEASE)
@@ -85,7 +80,7 @@ class ClevertapFlutterPlugin: MethodCallHandler {
 //    if(checkReadPhoneStatePermission())
 //      deviceDetailsMap.put("Device IMEI", telephonyManager.deviceId)
 
-    Log.d("flutter device Details", deviceDetailsMap.entries.toString())
+    Log.d("CleverTapEvent device", deviceDetailsMap.entries.toString())
   }
 
 //  private fun checkReadPhoneStatePermission(): Boolean {

@@ -13,9 +13,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String _pushProfileMessage = 'Unknown';
-  bool _pushEventMessage;
+  bool _pushParamsEventMessage, _pushNoParamsEventMessage;
 
-
+  Map<String, dynamic> paramsMap = {
+    "eventParams1": 25,
+    "eventParams2": "Param2",
+  };
 
   @override
   initState(){
@@ -24,16 +27,19 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> pushClevertapEvent() async {
-    bool eventSuccessMessage;
-    String profileSuccessMessage;
+
+    bool pushEventParamsResult, pushEventResult;
+    String pushProfileResult;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      profileSuccessMessage = await ClevertapFlutter.pushProfile('PB', 'testpb@gmail.com');
-      eventSuccessMessage = await ClevertapFlutter.pushEvent('Sign Up Click 2');
+      pushProfileResult = await ClevertapFlutter.pushProfile('PB', 'testpb1@gmail.com');
+      pushEventParamsResult = await ClevertapFlutter.pushEvent('Sign Up Click Test', paramsMap);
+      pushEventResult = await ClevertapFlutter.pushEvent('No Params Test Event');
 
     } on PlatformException {
-      profileSuccessMessage = 'Failed to push Profile.';
-      eventSuccessMessage = false;
+      pushProfileResult = 'Failed to push Profile.';
+      pushEventParamsResult = false;
+      pushEventResult = false;
     }
 
     // If the widget was removed from the tree while the asynchronous platform
@@ -42,8 +48,9 @@ class _HomeScreenState extends State<HomeScreen> {
     if (!mounted) return;
 
     setState(() {
-      _pushProfileMessage = profileSuccessMessage;
-      _pushEventMessage = eventSuccessMessage;
+      _pushProfileMessage = pushProfileResult;
+      _pushParamsEventMessage = pushEventParamsResult;
+      _pushNoParamsEventMessage = pushEventResult;
 
     });
   }
@@ -52,8 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Colors.amber,
-        child: Center(child: Text('This is $_pushProfileMessage $_pushEventMessage')),
+        child: Center(child: Text('$_pushProfileMessage pushEvent1 $_pushParamsEventMessage pushEvent2 $_pushNoParamsEventMessage')),
       ),
     );
   }
