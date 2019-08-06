@@ -13,11 +13,16 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String _pushProfileMessage = 'Unknown';
+  bool _onUserLoginMessage;
   bool _pushParamsEventMessage, _pushNoParamsEventMessage;
 
   Map<String, dynamic> paramsMap = {
     "eventParams1": 25,
     "eventParams2": "Param2",
+  };
+
+  Map<String, dynamic> loginMap = {
+    "loginMap1": 100,
   };
 
   @override
@@ -28,16 +33,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> pushClevertapEvent() async {
 
-    bool pushEventParamsResult, pushEventResult;
+    bool pushEventParamsResult, pushEventResult, onUserLoginResult;
     String pushProfileResult;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       pushProfileResult = await ClevertapFlutter.pushProfile('PB', 'testpb1@gmail.com');
+      onUserLoginResult = await ClevertapFlutter.onUserLogin(loginMap);
+
       pushEventParamsResult = await ClevertapFlutter.pushEvent('Sign Up Click Test', paramsMap);
       pushEventResult = await ClevertapFlutter.pushEvent('No Params Test Event');
 
     } on PlatformException {
       pushProfileResult = 'Failed to push Profile.';
+      onUserLoginResult = false;
       pushEventParamsResult = false;
       pushEventResult = false;
     }
@@ -49,6 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     setState(() {
       _pushProfileMessage = pushProfileResult;
+      _onUserLoginMessage = onUserLoginResult;
       _pushParamsEventMessage = pushEventParamsResult;
       _pushNoParamsEventMessage = pushEventResult;
 
@@ -59,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: Center(child: Text('$_pushProfileMessage pushEvent1 $_pushParamsEventMessage pushEvent2 $_pushNoParamsEventMessage')),
+        child: Center(child: Text('$_pushProfileMessage $_onUserLoginMessage pushEvent1 $_pushParamsEventMessage pushEvent2 $_pushNoParamsEventMessage')),
       ),
     );
   }

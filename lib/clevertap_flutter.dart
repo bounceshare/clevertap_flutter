@@ -29,5 +29,12 @@ class ClevertapFlutter {
     return result;
   }
 
+  static Future<bool> onUserLogin(Map values) async {
+    Map<String, dynamic> arguments = values;
+
+    final bool result = await _channel.invokeMethod('onUserLogin', arguments);
+    return result;
+  }
+
 
 }

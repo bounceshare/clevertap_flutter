@@ -50,6 +50,16 @@ class ClevertapFlutterPlugin: MethodCallHandler {
         result.success(true)
       }
 
+      "onUserLogin" -> {
+        initializeDeviceDetailsMap()
+
+        val values = call.arguments as HashMap<String, Any>
+        ct!!.onUserLogin(values)
+
+        Log.d("CleverTapEvent", "onUserLogin: $values")
+        result.success(true)
+      }
+
       else -> result.notImplemented()
     }
   }
@@ -71,6 +81,7 @@ class ClevertapFlutterPlugin: MethodCallHandler {
   }
 
   private fun initializeDeviceDetailsMap() {
+    deviceDetailsMap.clear()
     deviceDetailsMap.put("OS Version", Build.VERSION.RELEASE)
     deviceDetailsMap.put("App Version", BuildConfig.VERSION_NAME)
     deviceDetailsMap.put("Device Model", Build.MODEL)
