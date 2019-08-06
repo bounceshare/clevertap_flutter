@@ -18,8 +18,10 @@ class ClevertapFlutter {
     return result;
   }
 
-  static Future<String> pushEvent() async {
-    final String result = await _channel.invokeMethod('pushEvent');
+  static Future<bool> pushEvent(String eventName) async {
+    Map<String, dynamic> arguments = { "eventName": eventName, };
+
+    final bool result = await _channel.invokeMethod('pushEvent', arguments);
     print('pushEvent Flutter $result');
     return result;
   }

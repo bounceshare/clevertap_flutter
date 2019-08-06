@@ -13,7 +13,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String _pushProfileMessage = 'Unknown';
-  String _pushEventMessage = 'Unknown';
+  bool _pushEventMessage;
 
 
 
@@ -24,16 +24,16 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> pushClevertapEvent() async {
-    String eventSuccessMessage;
+    bool eventSuccessMessage;
     String profileSuccessMessage;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       profileSuccessMessage = await ClevertapFlutter.pushProfile('PB', 'testpb@gmail.com');
-      eventSuccessMessage = await ClevertapFlutter.pushEvent();
+      eventSuccessMessage = await ClevertapFlutter.pushEvent('Sign Up Click 2');
 
     } on PlatformException {
       profileSuccessMessage = 'Failed to push Profile.';
-      eventSuccessMessage = 'Failed to push Event';
+      eventSuccessMessage = false;
     }
 
     // If the widget was removed from the tree while the asynchronous platform
