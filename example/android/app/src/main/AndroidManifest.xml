@@ -14,10 +14,10 @@
         android:icon="@mipmap/ic_launcher">
         <meta-data
             android:name="CLEVERTAP_ACCOUNT_ID"
-            android:value="TEST-WWW-8WW-545Z" />
+            android:value="Your CleverTap account ID goes here" />
         <meta-data
             android:name="CLEVERTAP_TOKEN"
-            android:value="TEST-00b-000" />
+            android:value="Your CleverTap Token goes here" />
         <meta-data
             android:name="CLEVERTAP_USE_GOOGLE_AD_ID"
             android:value="1"/>
