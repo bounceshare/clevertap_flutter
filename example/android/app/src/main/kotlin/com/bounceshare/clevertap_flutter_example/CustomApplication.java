@@ -3,7 +3,7 @@ package com.bounceshare.clevertap_flutter_example;
 
 import android.app.Activity;
 import android.app.Application;
-import android.support.annotation.CallSuper;
+// import android.support.annotation.CallSuper;
 
 import com.clevertap.android.sdk.ActivityLifecycleCallback;
 
@@ -15,7 +15,7 @@ public class CustomApplication extends Application {
     public CustomApplication() {
     }
 
-    @CallSuper
+    @Override
     public void onCreate() {
         ActivityLifecycleCallback.register(this);
         super.onCreate();
