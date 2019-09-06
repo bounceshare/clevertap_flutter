@@ -1,6 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   package="com.bounceshare.clevertap_flutter">
-    <application  android:name=".ClevertapApplication"
-        android:label="clevertap_flutter_application">
+    <application  android:name=".ClevertapApplication">
     </application>
 </manifest>
