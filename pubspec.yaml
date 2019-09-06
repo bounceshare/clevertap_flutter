@@ -1,7 +1,7 @@
 name: clevertap_flutter
 description: Clevertap plugin (Android/iOS) for Flutter
 version: 0.0.1
-author:
+authors:
   - Pooja Bhaumik <pbhaumik26@gmail.com>
   - Raja Earla <earla.raja@gmail.com>
   - Nitish Sahani <nitishssahani@gmail.com>
