@@ -5,8 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:clevertap_flutter/clevertap_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
-
-
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -17,32 +15,33 @@ class _HomeScreenState extends State<HomeScreen> {
   bool _pushParamsEventMessage, _pushNoParamsEventMessage;
 
   Map<String, dynamic> paramsMap = {
-    "eventParams1": 25,
-    "eventParams2": "Param2",
+    "version": 2.0,
+    "name": "TestName",
   };
 
   Map<String, dynamic> loginMap = {
-    "loginMap1": 100,
+    "onUserLoginParam": 100,
   };
 
   @override
-  initState(){
+  initState() {
     super.initState();
     pushClevertapEvent();
   }
 
   Future<void> pushClevertapEvent() async {
-
     bool pushEventParamsResult, pushEventResult, onUserLoginResult;
     String pushProfileResult;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      pushProfileResult = await ClevertapFlutter.pushProfile('PB', 'testpb1@gmail.com');
+      pushProfileResult =
+          await ClevertapFlutter.pushProfile('TestName', 'test@gmail.com');
       onUserLoginResult = await ClevertapFlutter.onUserLogin(loginMap);
 
-      pushEventParamsResult = await ClevertapFlutter.pushEvent('Sign Up Click Test', paramsMap);
-      pushEventResult = await ClevertapFlutter.pushEvent('No Params Test Event');
-
+      pushEventParamsResult =
+          await ClevertapFlutter.pushEvent('Params Event', paramsMap);
+      pushEventResult =
+          await ClevertapFlutter.pushEvent('No Params Test Event');
     } on PlatformException {
       pushProfileResult = 'Failed to push Profile.';
       onUserLoginResult = false;
@@ -60,7 +59,6 @@ class _HomeScreenState extends State<HomeScreen> {
       _onUserLoginMessage = onUserLoginResult;
       _pushParamsEventMessage = pushEventParamsResult;
       _pushNoParamsEventMessage = pushEventResult;
-
     });
   }
 
@@ -68,7 +66,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: Center(child: Text('$_pushProfileMessage $_onUserLoginMessage pushEvent1 $_pushParamsEventMessage pushEvent2 $_pushNoParamsEventMessage')),
+        child: Center(
+            child: Text(
+                '$_pushProfileMessage $_onUserLoginMessage pushEvent1 $_pushParamsEventMessage pushEvent2 $_pushNoParamsEventMessage')),
       ),
     );
   }
