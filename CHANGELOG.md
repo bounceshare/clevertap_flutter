@@ -1,3 +1,4 @@
 ## 0.0.1
 
-* TODO: Describe initial release.
+* Initial release for CleverTap Flutter Plugin for Android & iOS
+* AndroidX compatibility
