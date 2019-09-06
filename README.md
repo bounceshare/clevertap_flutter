@@ -8,11 +8,11 @@ Clevertap plugin (Android/iOS) for Flutter
 
 ### Android Project setup:
 
-Add your CleverTap Account ID and CleverTap Token in AndroidManifest.xml of your project
+Add your CleverTap Account ID and CleverTap Token in AndroidManifest.xml of your Android project
 
 ### iOS Project setup:
 
-Add your CleverTap Account ID and CleverTap Token in Info.plist of your project
+Add your CleverTap Account ID and CleverTap Token in Info.plist of your iOS project
 
 ## Usage
 
