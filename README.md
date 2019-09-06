@@ -9,14 +9,10 @@ Clevertap plugin (Android/iOS) for Flutter
 ### Android Project setup:
 
 1. Add your CleverTap Account ID and CleverTap Token in AndroidManifest.xml of your project
-2. Add ``implementation 'com.clevertap.android:clevertap-android-sdk:<version>'`` to your dependencies in app/build.gradle
-3. Create a CustomApplication class and add ``ActivityLifecycleCallback.register(this);`` in your `onCreate()`
 
 ### iOS Project setup:
 
  Add your CleverTap Account ID and CleverTap Token in Info.plist of your project
-
-
 
 ## Usage
 
