@@ -1,18 +1,15 @@
-package com.bounceshare.clevertap_flutter_example;
-
+package com.bounceshare.clevertap_flutter;
 
 import android.app.Activity;
 import android.app.Application;
-// import android.support.annotation.CallSuper;
-
 import com.clevertap.android.sdk.ActivityLifecycleCallback;
 
 import io.flutter.view.FlutterMain;
 
-public class CustomApplication extends Application {
+public class ClevertapApplication extends Application {
     private Activity mCurrentActivity = null;
 
-    public CustomApplication() {
+    public ClevertapApplication() {
     }
 
     @Override

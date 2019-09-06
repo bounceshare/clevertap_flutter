@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:collection';
 
 import 'package:flutter/services.dart';
 
@@ -13,14 +12,14 @@ class ClevertapFlutter {
   }
 
   static Future<String> pushProfile(String name, String email) async {
-    Map<String, dynamic> arguments = { 'Name': name, 'Email': email };
+    Map<String, dynamic> arguments = {'Name': name, 'Email': email};
 
     final String result = await _channel.invokeMethod('pushProfile', arguments);
     return result;
   }
 
   static Future<bool> pushEvent(String eventName, [Map params]) async {
-    Map<String, dynamic> arguments = { "eventName": eventName, "values" : params};
+    Map<String, dynamic> arguments = {"eventName": eventName, "values": params};
 
     bool result;
     result = await _channel.invokeMethod('pushEvent', arguments);
@@ -35,6 +34,4 @@ class ClevertapFlutter {
     final bool result = await _channel.invokeMethod('onUserLogin', arguments);
     return result;
   }
-
-
 }
