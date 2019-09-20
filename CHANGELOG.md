@@ -1,3 +1,7 @@
+## 0.0.3
+
+* Permissions fix
+
 ## 0.0.2
 
 * Bug Fix
