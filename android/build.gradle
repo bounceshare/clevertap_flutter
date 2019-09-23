@@ -1,3 +1,17 @@
+def PLUGIN = "clevertap_flutter";
+def ANDROIDX_WARNING = "flutterPluginsAndroidXWarning";
+gradle.buildFinished { buildResult ->
+    if (buildResult.failure && !rootProject.ext.has(ANDROIDX_WARNING)) {
+        println '         *********************************************************'
+        println 'WARNING: This version of ' + PLUGIN + ' will break your Android build if it or its dependencies aren\'t compatible with AndroidX.'
+        println '         See https://goo.gl/CP92wY for more information on the problem and how to fix it.'
+        println '         This warning prints for all Android build failures. The real root cause of the error may be unrelated.'
+        println '         *********************************************************'
+        rootProject.ext.set(ANDROIDX_WARNING, true);
+    }
+}
+
+
 group 'com.bounceshare.clevertap_flutter'
 version '1.0-SNAPSHOT'
 
@@ -9,7 +23,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.0'
+        classpath 'com.android.tools.build:gradle:3.4.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -18,6 +32,15 @@ rootProject.allprojects {
     repositories {
         google()
         jcenter()
+    }
+}
+
+
+allprojects {
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+        }
     }
 }
 
@@ -37,11 +60,13 @@ android {
     lintOptions {
         disable 'InvalidPackage'
     }
+
+    dependencies {
+        implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+        implementation 'com.clevertap.android:clevertap-android-sdk:3.5.1'
+        implementation 'com.google.android.gms:play-services-gcm:16.0.0'
+        implementation 'com.google.android.gms:play-services-base:16.0.1'
+    }
 }
 
-dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.clevertap.android:clevertap-android-sdk:3.5.1'
-    implementation 'com.google.android.gms:play-services-gcm:16.0.0'
-    implementation 'com.google.android.gms:play-services-base:16.0.1'
-}
+
