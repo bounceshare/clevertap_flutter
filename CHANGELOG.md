@@ -1,3 +1,10 @@
+## 0.0.4
+
+* Updated Gradle version
+* AndroidX version
+* Added gradle-wrapper.properties
+* Fix errors
+
 ## 0.0.3
 
 * Permissions fix
