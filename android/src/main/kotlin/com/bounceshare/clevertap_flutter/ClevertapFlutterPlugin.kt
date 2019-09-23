@@ -76,14 +76,11 @@ class ClevertapFlutterPlugin: MethodCallHandler {
     return deviceDetailsMap
   }
 
-  val isDebug: Boolean by lazy {
-    BuildConfig.DEBUG
-  }
 
   private fun initializeDeviceDetailsMap() {
     deviceDetailsMap.clear()
     deviceDetailsMap.put("OS Version", Build.VERSION.RELEASE)
-    deviceDetailsMap.put("App Version", BuildConfig.VERSION_NAME)
+//    deviceDetailsMap.put("App Version", BuildConfig.VERSION_NAME)
     deviceDetailsMap.put("Device Model", Build.MODEL)
     deviceDetailsMap.put("Manufacturer", Build.MANUFACTURER)
     deviceDetailsMap.put("Device Brand", Build.BRAND)
