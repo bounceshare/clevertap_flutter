@@ -1,7 +1,7 @@
 ## 0.0.4
 
 * Updated Gradle version
-* AndroidX version
+* AndroidX version warning
 * Added gradle-wrapper.properties
 * Fix errors
 
