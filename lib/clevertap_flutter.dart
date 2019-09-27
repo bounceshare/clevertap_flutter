@@ -11,8 +11,8 @@ class ClevertapFlutter {
     return version;
   }
 
-  static Future<String> pushProfile(String name, String email) async {
-    Map<String, dynamic> arguments = {'Name': name, 'Email': email};
+  static Future<String> pushProfile(String name, String email, String identity) async {
+    Map<String, dynamic> arguments = {'Name': name, 'Email': email, 'Identity' : identity};
 
     final String result = await _channel.invokeMethod('pushProfile', arguments);
     return result;
@@ -24,7 +24,6 @@ class ClevertapFlutter {
     bool result;
     result = await _channel.invokeMethod('pushEvent', arguments);
 
-    print('pushEventParams Flutter $arguments');
     return result;
   }
 
