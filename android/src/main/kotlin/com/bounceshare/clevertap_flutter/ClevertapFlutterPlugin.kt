@@ -34,7 +34,6 @@ class ClevertapFlutterPlugin: MethodCallHandler {
         val profileUpdate = call.arguments as HashMap<String, Any>
         ct!!.pushProfile(profileUpdate)
 
-        Log.d("CleverTapEvent", "pushProfile: $profileUpdate")
 
         result.success("Profile Pushed ${call.arguments}" )
       }
@@ -44,7 +43,6 @@ class ClevertapFlutterPlugin: MethodCallHandler {
         val eventName : String = call.argument("eventName")?:"Null Event"
         val params : HashMap<String, Any>? = call.argument("values") as HashMap<String, Any>?
 
-        Log.d("flutter pushEvent", eventName + addDeviceDetails(params).entries.toString())
 
         ct!!.pushEvent(eventName, addDeviceDetails(params))
         result.success(true)
@@ -56,7 +54,6 @@ class ClevertapFlutterPlugin: MethodCallHandler {
         val values = call.arguments as HashMap<String, Any>
         ct!!.onUserLogin(values)
 
-        Log.d("CleverTapEvent", "onUserLogin: $values")
         result.success(true)
       }
 
@@ -72,7 +69,6 @@ class ClevertapFlutterPlugin: MethodCallHandler {
       deviceDetailsMap.putAll(it)
     }
 
-    Log.d("pushEvent DEVICE ", deviceDetailsMap.entries.toString())
     return deviceDetailsMap
   }
 
@@ -88,7 +84,6 @@ class ClevertapFlutterPlugin: MethodCallHandler {
 //    if(checkReadPhoneStatePermission())
 //      deviceDetailsMap.put("Device IMEI", telephonyManager.deviceId)
 
-    Log.d("CleverTapEvent device", deviceDetailsMap.entries.toString())
   }
 
 //  private fun checkReadPhoneStatePermission(): Boolean {
