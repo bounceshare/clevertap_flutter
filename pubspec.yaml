@@ -1,6 +1,6 @@
 name: clevertap_flutter
 description: Clevertap Flutter plugin to send Clevertap events to Android/iOS
-version: 0.0.4
+version: 0.0.5
 authors:
   - Pooja Bhaumik <pbhaumik26@gmail.com>
   - Raja Earla <earla.raja@gmail.com>

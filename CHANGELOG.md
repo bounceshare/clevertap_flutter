@@ -1,3 +1,6 @@
+## 0.0.5
+* Add identity parameter to push profile
+
 ## 0.0.4
 
 * Updated Gradle version
