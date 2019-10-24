@@ -16,7 +16,7 @@ Flutter Plugin For Clevertap
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
   s.dependency 'CleverTap-iOS-SDK'
-
-  s.ios.deployment_target = '8.0'
+  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.1' } --> s.swift_version = "4.1"
+  s.ios.deployment_target = '11.0'
 end
 
