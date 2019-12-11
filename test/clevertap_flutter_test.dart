@@ -6,9 +6,7 @@ void main() {
   const MethodChannel channel = MethodChannel('clevertap_flutter');
 
   setUp(() {
-    channel.setMockMethodCallHandler((MethodCall methodCall) async {
-      return '42';
-    });
+    channel.setMockMethodCallHandler((MethodCall methodCall) async => '42');
   });
 
   tearDown(() {
