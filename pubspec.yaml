@@ -5,6 +5,7 @@ authors:
   - Pooja Bhaumik <pbhaumik26@gmail.com>
   - Raja Earla <earla.raja@gmail.com>
   - Nitish Sahani <nitishssahani@gmail.com>
+  - Nandan Satheesh <nandan.199776@gmail.com>
 homepage: https://github.com/bounceshare/clevertap_flutter
 
 environment:
@@ -15,6 +16,7 @@ dependencies:
     sdk: flutter
 
 dev_dependencies:
+  pedantic: ^1.8.0
   flutter_test:
     sdk: flutter
 
