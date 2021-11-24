@@ -63,7 +63,7 @@ android {
 
     dependencies {
         implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-        implementation 'com.clevertap.android:clevertap-android-sdk:3.5.1'
+        implementation 'com.clevertap.android:clevertap-android-sdk:3.9.1'
         implementation 'com.google.android.gms:play-services-gcm:16.0.0'
         implementation 'com.google.android.gms:play-services-base:16.0.1'
     }
